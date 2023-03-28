@@ -16,9 +16,9 @@
                     </header>
                     <div class="auth-content">
                         <p class="text-center">Inicie sesion para continuar</p>
+                        {% csrf_token %}
                         <form id="login-form" method="POST" novalidate="">
                             <div class="form-group">
-                                {% csrf_token %}
                                 <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
                                 {{ form.username }}
                             </div>

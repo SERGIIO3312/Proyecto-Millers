@@ -125,5 +125,5 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'inventario.Usuario' # modelo de usuario
 
 # Agregar ruta de STATIC_ROOT
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR + '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
