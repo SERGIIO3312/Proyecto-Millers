@@ -33,16 +33,16 @@ class ProductoFormulario(forms.ModelForm):
         )
     class Meta:
         model = Producto
-        fields = ['descripcion','precio','disponible','categoria','tiene_iva']
+        fields = ['descripcion','precio','categoria','tiene_iva']
         labels = {
         'descripcion': 'Nombre',
         'tiene_iva': 'Incluye IVA?'
         }
         widgets = {
-        'descripcion': forms.TextInput(attrs={'placeholder': 'Nombre del producto','id':'descripcion','class':'form-control'} ),
+        'descripcion': forms.TextInput(attrs={'placeholder': 'Nombre del producto',
+        'id':'descripcion','class':'form-control'} ),
         'categoria': forms.Select(attrs={'class':'form-control','id':'categoria'}),
-        'tiene_iva': forms.CheckboxInput(attrs={'class':'checkbox rounded','id':'tiene_iva'}) ,
-        "disponible": forms.TextInput(attrs={'placeholder': 'Cantidad','id':'cantidad','class':'form-control'} )
+        'tiene_iva': forms.CheckboxInput(attrs={'class':'checkbox rounded','id':'tiene_iva'}) 
         }
 
 class ImportarProductosFormulario(forms.Form):
@@ -89,7 +89,7 @@ class ExportarClientesFormulario(forms.Form):
 
 
 class ClienteFormulario(forms.ModelForm):
-    tipoC =  [ ('1','CC'),('2','TI') ]
+    tipoC =  [ ('1','V'),('2','E') ]
 
     telefono2 = forms.CharField(
         required = False,
@@ -156,7 +156,7 @@ class EmitirFacturaFormulario(forms.Form):
             attrs={'placeholder': 'La cedula del cliente a facturar',
             'id':'cliente','class':'form-control'}))
     
-    productos = forms.IntegerField(label="Número de factura a generar",widget=forms.NumberInput(attrs={'placeholder': 'Numero de productos a facturar',
+    productos = forms.IntegerField(label="Numero de productos",widget=forms.NumberInput(attrs={'placeholder': 'Numero de productos a facturar',
         'id':'productos','class':'form-control'}))
 
 class DetallesFacturaFormulario(forms.Form):
@@ -209,7 +209,7 @@ class DetallesPedidoFormulario(forms.Form):
 
 
 class ProveedorFormulario(forms.ModelForm):
-    tipoC =  [ ('1','CC'),('2','TI') ]
+    tipoC =  [ ('1','V'),('2','E') ]
 
     telefono2 = forms.CharField(
         required = False,
@@ -244,7 +244,7 @@ class ProveedorFormulario(forms.ModelForm):
         'nombre': 'Nombre del proveedor',
         'apellido': 'Apellido del proveedor',
         'direccion': 'Direccion del proveedor',
-        'nacimiento': 'Fecha de ingreso',
+        'nacimiento': 'Fecha de nacimiento del proveedor',
         'telefono': 'Numero telefonico del proveedor',
         'correo': 'Correo electronico del proveedor',
         'telefono2': 'Segundo numero telefonico',

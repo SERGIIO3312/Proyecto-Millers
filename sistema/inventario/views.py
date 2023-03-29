@@ -372,7 +372,7 @@ class AgregarProducto(LoginRequiredMixin, View):
             precio = form.cleaned_data['precio']
             categoria = form.cleaned_data['categoria']
             tiene_iva = form.cleaned_data['tiene_iva']
-            disponible = form.cleaned_data['disponible']
+            disponible = 0
 
             prod = Producto(descripcion=descripcion,precio=precio,categoria=categoria,tiene_iva=tiene_iva,disponible=disponible)
             prod.save()
@@ -483,7 +483,6 @@ class EditarProducto(LoginRequiredMixin, View):
             descripcion = form.cleaned_data['descripcion']
             precio = form.cleaned_data['precio']
             categoria = form.cleaned_data['categoria']
-            disponible = form.cleaned_data['disponible']
             tiene_iva = form.cleaned_data['tiene_iva']
 
             prod = Producto.objects.get(id=p)
@@ -491,7 +490,6 @@ class EditarProducto(LoginRequiredMixin, View):
             prod.precio = precio
             prod.categoria = categoria
             prod.tiene_iva = tiene_iva
-            prod.disponible = disponible
             prod.save()
             form = ProductoFormulario(instance=prod)
             messages.success(request, 'Actualizado exitosamente el producto de ID %s.' % p)
@@ -1224,7 +1222,7 @@ class DetallesPedido(LoginRequiredMixin, View):
                     total_general.append(nuevoPrecio)                     
                 else:                   
                     monto_general += element
-                    total_general.append(element)   
+                    total_general.append(element)        
 
             from datetime import date
 

@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
 
 
 # MODELOS
@@ -10,7 +8,7 @@ from django.dispatch import receiver
 class Usuario(AbstractUser):
     #id
     username = models.CharField(max_length=80, unique=True)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=20)
     email = models.EmailField(max_length=100, unique=True)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=60)
@@ -41,7 +39,7 @@ class Opciones(models.Model):
 #-------------------------------PRODUCTO------------------------------------------------
 class Producto(models.Model):
     #id
-    decisiones =  [('1','Unidad'),('2','Litro'),('3','Otros')]
+    decisiones =  [('1','Unidad'),('2','Kilo'),('3','Litro'),('4','Otros')]
     descripcion = models.CharField(max_length=40)
     precio = models.DecimalField(max_digits=9,decimal_places=2)
     disponible = models.IntegerField(null=True)
@@ -100,11 +98,6 @@ class Producto(models.Model):
             arreglo[indice + extra].append("%d" % (productos_disponibles) )  
 
         return arreglo 
-    
-
-@receiver(pre_save, sender=Producto)
-def my_handler(instance, sender, **kwargs):
-    print(instance.disponible)
 #---------------------------------------------------------------------------------------
 
 
@@ -193,13 +186,6 @@ class DetalleFactura(models.Model):
         objetos = self.objects.all().order_by('-id')[:10]
 
         return objetos
-    
-@receiver(pre_save, sender=DetalleFactura)
-def actualizar_inventario(sender, instance, **kwargs):
-    print(sender)
-    # producto = instance.id_producto
-    # producto.cantidad -= instance.cantidad
-    # producto.save()
 #---------------------------------------------------------------------------------------
 
 
